@@ -47,6 +47,12 @@
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -54,6 +60,8 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -173,11 +181,14 @@
     <Content Include="Content\dist\img\user6-128x128.jpg" />
     <Content Include="Content\dist\img\user7-128x128.jpg" />
     <Content Include="Content\dist\img\user8-128x128.jpg" />
+    <Content Include="Content\dist\img\useravatar.png" />
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\dist\js\app.min.js" />
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\FontAwesome\font-awesome.css" />
+    <Content Include="Content\FontAwesome\font-awesome.min.css" />
     <Content Include="Content\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\plugins\bootstrap-slider\slider.css" />
     <Content Include="Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -980,8 +991,19 @@
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\DbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
@@ -1105,10 +1127,65 @@
     <Content Include="Content\plugins\datatables\extensions\TableTools\Readme.md" />
     <Content Include="Content\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\plugins\input-mask\phone-codes\phone-codes.json" />
+    <EntityDeploy Include="Models\DbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbModel.edmx.diagram">
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Style\css\main.css" />
+    <Content Include="Style\css\util.css" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Style\fonts\iconic\css\material-design-iconic-font.css" />
+    <Content Include="Style\fonts\iconic\css\material-design-iconic-font.min.css" />
+    <Content Include="Style\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Style\images\icons\favicon.ico" />
+    <Content Include="Style\js\main.js" />
+    <Content Include="Style\vendor\animate\animate.css" />
+    <Content Include="Style\vendor\animsition\css\animsition.css" />
+    <Content Include="Style\vendor\animsition\css\animsition.min.css" />
+    <Content Include="Style\vendor\animsition\js\animsition.js" />
+    <Content Include="Style\vendor\animsition\js\animsition.min.js" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Style\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Style\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Style\vendor\bootstrap\js\popper.js" />
+    <Content Include="Style\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="Style\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="Style\vendor\countdowntime\countdowntime.js" />
+    <Content Include="Style\vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="Style\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Style\vendor\daterangepicker\daterangepicker.css" />
+    <Content Include="Style\vendor\daterangepicker\daterangepicker.js" />
+    <Content Include="Style\vendor\daterangepicker\moment.js" />
+    <Content Include="Style\vendor\daterangepicker\moment.min.js" />
+    <Content Include="Style\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Style\vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="Style\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="Style\vendor\select2\select2.css" />
+    <Content Include="Style\vendor\select2\select2.js" />
+    <Content Include="Style\vendor\select2\select2.min.css" />
+    <Content Include="Style\vendor\select2\select2.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_mainView.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1117,8 +1194,35 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonelKayitController.cs" />
+    <Compile Include="Controllers\YoneticiGirisController.cs" />
+    <Compile Include="Controllers\YoneticiKayitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Görevlendirme.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Personel.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Yonetici.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1129,6 +1233,70 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\YoneticiGiris\YoneticiGiris.cshtml" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Style\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Style\fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Style\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Style\fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Style\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Style\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="Style\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Style\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Views\PersonelKayit\PersonelKayit.cshtml" />
+    <Content Include="Views\YoneticiKayit\YoneticiKayit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1138,7 +1306,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

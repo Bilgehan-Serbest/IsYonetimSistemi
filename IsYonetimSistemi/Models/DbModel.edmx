@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IsYonetimDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Görevlendirme">
+          <Key>
+            <PropertyRef Name="yonetici_kullanici_adi" />
+            <PropertyRef Name="personel_kullanici_adi" />
+          </Key>
+          <Property Name="yonetici_kullanici_adi" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="personel_kullanici_adi" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="gorev_adi" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="gorev_tanimi" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanici_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="parola" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="50" />
+          <Property Name="soyad" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="maas" Type="int" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanici_adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="parola" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="50" />
+          <Property Name="soyad" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="maas" Type="int" />
+        </EntityType>
+        <EntityContainer Name="IsYonetimDBModelStoreContainer">
+          <EntitySet Name="Görevlendirme" EntityType="Self.Görevlendirme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IsYonetimDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Görevlendirme">
+          <Key>
+            <PropertyRef Name="yonetici_kullanici_adi" />
+            <PropertyRef Name="personel_kullanici_adi" />
+          </Key>
+          <Property Name="yonetici_kullanici_adi" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="personel_kullanici_adi" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gorev_adi" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gorev_tanimi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanici_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parola" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="maas" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanici_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parola" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="maas" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="IsYonetimDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Görevlendirme" EntityType="Self.Görevlendirme" />
+          <EntitySet Name="Personels" EntityType="Self.Personel" />
+          <EntitySet Name="Yoneticis" EntityType="Self.Yonetici" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IsYonetimDBModelStoreContainer" CdmEntityContainer="IsYonetimDBEntities">
+          <EntitySetMapping Name="Görevlendirme">
+            <EntityTypeMapping TypeName="IsYonetimDBModel.Görevlendirme">
+              <MappingFragment StoreEntitySet="Görevlendirme">
+                <ScalarProperty Name="yonetici_kullanici_adi" ColumnName="yonetici_kullanici_adi" />
+                <ScalarProperty Name="personel_kullanici_adi" ColumnName="personel_kullanici_adi" />
+                <ScalarProperty Name="gorev_adi" ColumnName="gorev_adi" />
+                <ScalarProperty Name="gorev_tanimi" ColumnName="gorev_tanimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personels">
+            <EntityTypeMapping TypeName="IsYonetimDBModel.Personel">
+              <MappingFragment StoreEntitySet="Personel">
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
+                <ScalarProperty Name="parola" ColumnName="parola" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="maas" ColumnName="maas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yoneticis">
+            <EntityTypeMapping TypeName="IsYonetimDBModel.Yonetici">
+              <MappingFragment StoreEntitySet="Yonetici">
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
+                <ScalarProperty Name="parola" ColumnName="parola" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="maas" ColumnName="maas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
