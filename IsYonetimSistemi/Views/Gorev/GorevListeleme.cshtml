@@ -53,11 +53,9 @@
                         }
                     }
                 </td>
-                @*<td>
-                    @Html.ActionLink("Düzenle", "Düzenle", new { id = item.kullanici_id }) |
-                    @Html.ActionLink("Detay", "Detay", new { id = item.kullanici_id }) |
-                    @Html.ActionLink("Sil", "Sil", new { id = item.kullanici_id })
-                </td>*@
+                <td>
+                    @Html.ActionLink("Sil", "GorevSilme", new { id = item.gorev_id })
+                </td>
             </tr>
         }
 

@@ -1,0 +1,57 @@
+﻿@model IsYonetimSistemi.Models.Personel
+@{
+    ViewBag.Title = "Sil";
+    Layout = "~/Views/Shared/_mainView.cshtml";
+}
+
+<h2>Sil</h2>
+
+<h3>Bu personeli silmek istediğinizden emin misiniz?</h3>
+<div>
+    <h4>Personel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soyad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soyad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maas)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Personel Listesine Dön", "Index")
+        </div>
+    }
+</div>

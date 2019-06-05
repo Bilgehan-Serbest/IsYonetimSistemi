@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IsYonetimSistemi.Models;
+using System.Net;
 
 namespace IsYonetimSistemi.Controllers
 {
@@ -51,6 +52,33 @@ namespace IsYonetimSistemi.Controllers
                 }
             }
         }
+
+        // GET: Personels/Sil/5
+        public ActionResult GorevSilme(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Gorevlendirme gorev = db.Gorevlendirmes.Find(id);
+            if (gorev == null)
+            {
+                return HttpNotFound();
+            }
+            return View(gorev);
+        }
+
+        // POST: Personels/Sil/5
+        [HttpPost, ActionName("GorevSilme")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Gorevlendirme gorev = db.Gorevlendirmes.Find(id);
+            db.Gorevlendirmes.Remove(gorev);
+            db.SaveChanges();
+            return RedirectToAction("GorevListeleme");
+        }
+
     }
         
 }
