@@ -7,9 +7,9 @@
       <Schema Namespace="IsYonetimDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Gorevlendirme">
           <Key>
-            <PropertyRef Name="personel_id" />
-            <PropertyRef Name="yonetici_id" />
+            <PropertyRef Name="gorev_id" />
           </Key>
+          <Property Name="gorev_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="personel_id" Type="int" Nullable="false" />
           <Property Name="yonetici_id" Type="int" Nullable="false" />
           <Property Name="gorev_adi" Type="varchar" MaxLength="50" />
@@ -83,9 +83,9 @@
       <Schema Namespace="IsYonetimDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Gorevlendirme">
           <Key>
-            <PropertyRef Name="personel_id" />
-            <PropertyRef Name="yonetici_id" />
+            <PropertyRef Name="gorev_id" />
           </Key>
+          <Property Name="gorev_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="personel_id" Type="Int32" Nullable="false" />
           <Property Name="yonetici_id" Type="Int32" Nullable="false" />
           <Property Name="gorev_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -165,6 +165,7 @@
           <EntitySetMapping Name="Gorevlendirmes">
             <EntityTypeMapping TypeName="IsYonetimDBModel.Gorevlendirme">
               <MappingFragment StoreEntitySet="Gorevlendirme">
+                <ScalarProperty Name="gorev_id" ColumnName="gorev_id" />
                 <ScalarProperty Name="personel_id" ColumnName="personel_id" />
                 <ScalarProperty Name="yonetici_id" ColumnName="yonetici_id" />
                 <ScalarProperty Name="gorev_adi" ColumnName="gorev_adi" />

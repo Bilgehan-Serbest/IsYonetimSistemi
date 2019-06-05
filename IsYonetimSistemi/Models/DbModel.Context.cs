@@ -22,7 +22,7 @@ namespace IsYonetimSistemi.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Gorevlendirme> Gorevlendirmes { get; set; }

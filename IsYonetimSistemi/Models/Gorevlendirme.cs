@@ -16,14 +16,15 @@ namespace IsYonetimSistemi.Models
 
     public partial class Gorevlendirme
     {
+        public int gorev_id { get; set; }
         public int personel_id { get; set; }
         public int yonetici_id { get; set; }
         [DisplayName("Gorev Adi")]
         public string gorev_adi { get; set; }
-        [DisplayName("Gorev Aciklamasi")]
+        [DisplayName("Gorev Tanimi")]
         [DataType(DataType.MultilineText)]
         public string gorev_tanimi { get; set; }
-
+    
         public virtual Personel Personel { get; set; }
         public virtual Yonetici Yonetici { get; set; }
     }

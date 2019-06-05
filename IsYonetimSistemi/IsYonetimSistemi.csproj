@@ -1304,6 +1304,7 @@
     <Content Include="Views\Personel\Index.cshtml" />
     <Content Include="Views\Personel\Düzenle.cshtml" />
     <Content Include="Views\Gorev\GorevAtama.cshtml" />
+    <Content Include="Views\Gorev\GorevListeleme.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

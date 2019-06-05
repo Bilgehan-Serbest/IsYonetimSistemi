@@ -23,33 +23,28 @@ namespace IsYonetimSistemi.Models
         }
     
         public int kullanici_id { get; set; }
-
         [DisplayName("Kullanici Adi")]
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string kullanici_adi { get; set; }
-
+        [DisplayName("Parola")]
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
-        [DataType(DataType.Password)]
         public string parola { get; set; }
-
-        [DisplayName("Parolayi onaylayin")]
+        [DisplayName("Parolayi Dogrulayin")]
         [DataType(DataType.Password)]
-        [Compare("parola")]
-        public string parola_dogrula { get; set; }
-
+        [Compare("Parola")]
+        public string parola_dogrula{ get; set; }
         [DisplayName("Ad")]
+        [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string ad { get; set; }
-
         [DisplayName("Soyad")]
+        [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string soyad { get; set; }
-
         [DisplayName("E-Mail")]
+        [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string email { get; set; }
-
         [DisplayName("Maas")]
+        [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public Nullable<int> maas { get; set; }
-
-        public bool gorevChecked { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gorevlendirme> Gorevlendirmes { get; set; }

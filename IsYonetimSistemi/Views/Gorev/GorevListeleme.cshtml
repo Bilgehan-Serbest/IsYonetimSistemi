@@ -1,0 +1,65 @@
+﻿@model List<IsYonetimSistemi.Models.Gorevlendirme>
+@using IsYonetimSistemi.Models;
+    @{
+        ViewBag.Title = "GorevListeleme";
+        Layout = "~/Views/Shared/_mainView.cshtml";
+    }
+
+    <h2>Gorev Listele</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Görev Adı   
+            </th>
+            <th>
+                Görev Tanımı
+            </th>
+            <th>
+               Görevin Atandığı Personel
+            </th>
+            <th>
+                Görevi Atayan Yönetici
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.gorev_adi
+                </td>
+                <td>
+                    @item.gorev_tanimi
+                </td>
+                <td>
+                    @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
+                        {
+                            var gorevinAtandigiPersonel = dbModel.Personels.Where(x => x.kullanici_id == item.personel_id).FirstOrDefault();
+                            @gorevinAtandigiPersonel.ad;
+                            <br />
+                            @gorevinAtandigiPersonel.soyad;
+                        }
+                    }
+                </td>
+                <td>
+                    @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
+                        {
+                            var gorevAtayanYonetici = dbModel.Yoneticis.Where(x => x.kullanici_id == item.yonetici_id).FirstOrDefault();
+                            @gorevAtayanYonetici.ad;
+                            <br />
+                            @gorevAtayanYonetici.soyad;
+                        }
+                    }
+                </td>
+                @*<td>
+                    @Html.ActionLink("Düzenle", "Düzenle", new { id = item.kullanici_id }) |
+                    @Html.ActionLink("Detay", "Detay", new { id = item.kullanici_id }) |
+                    @Html.ActionLink("Sil", "Sil", new { id = item.kullanici_id })
+                </td>*@
+            </tr>
+        }
+
+    </table>
+
