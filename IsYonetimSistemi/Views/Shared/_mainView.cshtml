@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = null;
-    if (Session["kullaniciID"] == null)
+    if (Session["yoneticiID"] == null)
     {
         Response.Redirect("~/YoneticiGiris/YoneticiGiris");
     }
@@ -70,16 +70,17 @@
                             <li><a href="@Url.Action("YoneticiKayit", "YoneticiKayit")"><i class="fa fa-circle-o"></i>Yeni Yönetici Kaydı</a></li>
                         </ul>
                     </li>
+                    <li><a href="@Url.Action("Index", "Personel")"><i class="fa fa-circle-o"></i>Personel Listesi</a></li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Personel Yönetimi</span>
+                            <i class="fa fa-dashboard"></i> <span>Görev Yönetimi</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-circle-o"></i>Personel Listesi</a></li>
-                            <li><a href=""><i class="fa fa-circle-o"></i>Görev Yönetimi</a></li>
+                        <ul class="treeview-menu">                            
+                            <li><a href="@Url.Action("GorevAtama", "Gorev")"><i class="fa fa-circle-o"></i>Görev Atama</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i>Mevcut Görev Listesi</a></li>
                         </ul>
                     </li>
                     <li>

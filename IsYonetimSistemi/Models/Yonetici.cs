@@ -16,18 +16,23 @@ namespace IsYonetimSistemi.Models
 
     public partial class Yonetici
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Yonetici()
+        {
+            this.Gorevlendirmes = new HashSet<Gorevlendirme>();
+        }
+    
         public int kullanici_id { get; set; }
 
         [DisplayName("Kullanici Adi")]
-        [Required(ErrorMessage = "Bu alan doldurulmalidir.")]
+        [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string kullanici_adi { get; set; }
 
-        [DisplayName("Parola")]
-        [Required(ErrorMessage = "Bu alan doldurulmalidir.")]
+        [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         [DataType(DataType.Password)]
         public string parola { get; set; }
-
-        [DisplayName("Parolayi Dogrulayin")]
+        
+        [DisplayName("Parolayi onaylayin")]
         [DataType(DataType.Password)]
         [Compare("parola")]
         public string parola_dogrula { get; set; }
@@ -43,5 +48,8 @@ namespace IsYonetimSistemi.Models
 
         [DisplayName("Maas")]
         public Nullable<int> maas { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Gorevlendirme> Gorevlendirmes { get; set; }
     }
 }

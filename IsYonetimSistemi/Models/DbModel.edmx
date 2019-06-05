@@ -5,15 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="IsYonetimDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Görevlendirme">
+        <EntityType Name="Gorevlendirme">
           <Key>
-            <PropertyRef Name="yonetici_kullanici_adi" />
-            <PropertyRef Name="personel_kullanici_adi" />
+            <PropertyRef Name="personel_id" />
+            <PropertyRef Name="yonetici_id" />
           </Key>
-          <Property Name="yonetici_kullanici_adi" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="personel_kullanici_adi" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="gorev_adi" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="gorev_tanimi" Type="nvarchar" MaxLength="200" />
+          <Property Name="personel_id" Type="int" Nullable="false" />
+          <Property Name="yonetici_id" Type="int" Nullable="false" />
+          <Property Name="gorev_adi" Type="varchar" MaxLength="50" />
+          <Property Name="gorev_tanimi" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -39,25 +39,59 @@
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="maas" Type="int" />
         </EntityType>
+        <Association Name="fk_personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
+          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Gorevlendirme">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_yonetici">
+          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
+          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetici">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Gorevlendirme">
+              <PropertyRef Name="yonetici_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="IsYonetimDBModelStoreContainer">
-          <EntitySet Name="Görevlendirme" EntityType="Self.Görevlendirme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gorevlendirme" EntityType="Self.Gorevlendirme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_personel" Association="Self.fk_personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Gorevlendirme" EntitySet="Gorevlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="fk_yonetici" Association="Self.fk_yonetici">
+            <End Role="Yonetici" EntitySet="Yonetici" />
+            <End Role="Gorevlendirme" EntitySet="Gorevlendirme" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IsYonetimDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Görevlendirme">
+        <EntityType Name="Gorevlendirme">
           <Key>
-            <PropertyRef Name="yonetici_kullanici_adi" />
-            <PropertyRef Name="personel_kullanici_adi" />
+            <PropertyRef Name="personel_id" />
+            <PropertyRef Name="yonetici_id" />
           </Key>
-          <Property Name="yonetici_kullanici_adi" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="personel_kullanici_adi" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="gorev_adi" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="gorev_tanimi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="personel_id" Type="Int32" Nullable="false" />
+          <Property Name="yonetici_id" Type="Int32" Nullable="false" />
+          <Property Name="gorev_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gorev_tanimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Personel" Relationship="Self.fk_personel" FromRole="Gorevlendirme" ToRole="Personel" />
+          <NavigationProperty Name="Yonetici" Relationship="Self.fk_yonetici" FromRole="Gorevlendirme" ToRole="Yonetici" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -70,6 +104,7 @@
           <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="maas" Type="Int32" />
+          <NavigationProperty Name="Gorevlendirmes" Relationship="Self.fk_personel" FromRole="Personel" ToRole="Gorevlendirme" />
         </EntityType>
         <EntityType Name="Yonetici">
           <Key>
@@ -82,11 +117,44 @@
           <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="maas" Type="Int32" />
+          <NavigationProperty Name="Gorevlendirmes" Relationship="Self.fk_yonetici" FromRole="Yonetici" ToRole="Gorevlendirme" />
         </EntityType>
+        <Association Name="fk_personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
+          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Gorevlendirme">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_yonetici">
+          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
+          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetici">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Gorevlendirme">
+              <PropertyRef Name="yonetici_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="IsYonetimDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Görevlendirme" EntityType="Self.Görevlendirme" />
+          <EntitySet Name="Gorevlendirmes" EntityType="Self.Gorevlendirme" />
           <EntitySet Name="Personels" EntityType="Self.Personel" />
           <EntitySet Name="Yoneticis" EntityType="Self.Yonetici" />
+          <AssociationSet Name="fk_personel" Association="Self.fk_personel">
+            <End Role="Personel" EntitySet="Personels" />
+            <End Role="Gorevlendirme" EntitySet="Gorevlendirmes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_yonetici" Association="Self.fk_yonetici">
+            <End Role="Yonetici" EntitySet="Yoneticis" />
+            <End Role="Gorevlendirme" EntitySet="Gorevlendirmes" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -94,11 +162,11 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="IsYonetimDBModelStoreContainer" CdmEntityContainer="IsYonetimDBEntities">
-          <EntitySetMapping Name="Görevlendirme">
-            <EntityTypeMapping TypeName="IsYonetimDBModel.Görevlendirme">
-              <MappingFragment StoreEntitySet="Görevlendirme">
-                <ScalarProperty Name="yonetici_kullanici_adi" ColumnName="yonetici_kullanici_adi" />
-                <ScalarProperty Name="personel_kullanici_adi" ColumnName="personel_kullanici_adi" />
+          <EntitySetMapping Name="Gorevlendirmes">
+            <EntityTypeMapping TypeName="IsYonetimDBModel.Gorevlendirme">
+              <MappingFragment StoreEntitySet="Gorevlendirme">
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="yonetici_id" ColumnName="yonetici_id" />
                 <ScalarProperty Name="gorev_adi" ColumnName="gorev_adi" />
                 <ScalarProperty Name="gorev_tanimi" ColumnName="gorev_tanimi" />
               </MappingFragment>

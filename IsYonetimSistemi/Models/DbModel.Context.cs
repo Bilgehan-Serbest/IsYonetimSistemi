@@ -22,10 +22,10 @@ namespace IsYonetimSistemi.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            base.OnModelCreating(modelBuilder);
         }
     
-        public virtual DbSet<Görevlendirme> Görevlendirme { get; set; }
+        public virtual DbSet<Gorevlendirme> Gorevlendirmes { get; set; }
         public virtual DbSet<Personel> Personels { get; set; }
         public virtual DbSet<Yonetici> Yoneticis { get; set; }
     }

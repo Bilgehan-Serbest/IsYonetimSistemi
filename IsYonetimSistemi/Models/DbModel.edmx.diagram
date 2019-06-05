@@ -4,10 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="354fecfc395241b99da819d84cfe0bf3" Name="Diagram1">
-        <EntityTypeShape EntityType="IsYonetimDBModel.Görevlendirme" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IsYonetimDBModel.Personel" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IsYonetimDBModel.Yonetici" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="0eb4f4e3c9464efbb68aa5b15c6274a1" Name="Diagram1">
+        <EntityTypeShape EntityType="IsYonetimDBModel.Gorevlendirme" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IsYonetimDBModel.Personel" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IsYonetimDBModel.Yonetici" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="IsYonetimDBModel.fk_personel" ManuallyRouted="false" />
+        <AssociationConnector Association="IsYonetimDBModel.fk_yonetici" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

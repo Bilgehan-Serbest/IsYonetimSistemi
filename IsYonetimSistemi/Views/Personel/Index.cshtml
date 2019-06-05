@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IsYonetimSistemi.Models.Personel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mainView.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soyad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maas)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.soyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.maas)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Düzenle", new { id = item.kullanici_id }) |
+                @Html.ActionLink("Detay", "Detay", new { id = item.kullanici_id }) |
+                @Html.ActionLink("Sil", "Sil", new { id = item.kullanici_id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

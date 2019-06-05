@@ -28,7 +28,7 @@ namespace IsYonetimSistemi.Controllers
                 }
                 else
                 {
-                    Session["kullaniciID"] = yoneticiDetay.kullanici_id;
+                    Session["yoneticiID"] = yoneticiDetay.kullanici_id;
                     Session["yoneticiAd"] = yoneticiDetay.ad;
                     Session["yoneticiSoyad"] = yoneticiDetay.soyad;
                     return RedirectToAction("Index", "Home");
@@ -38,7 +38,7 @@ namespace IsYonetimSistemi.Controllers
 
         public ActionResult CikisYap()
         {
-            int kullaniciID = (int)Session["kullaniciID"];
+            int kullaniciID = (int)Session["yoneticiID"];
             Session.Abandon();
             return RedirectToAction("YoneticiGiris", "YoneticiGiris");
         }

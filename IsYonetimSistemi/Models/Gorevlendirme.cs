@@ -11,12 +11,20 @@ namespace IsYonetimSistemi.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Görevlendirme
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Gorevlendirme
     {
-        public string yonetici_kullanici_adi { get; set; }
-        public string personel_kullanici_adi { get; set; }
+        public int personel_id { get; set; }
+        public int yonetici_id { get; set; }
+        [DisplayName("Gorev Adi")]
         public string gorev_adi { get; set; }
+        [DisplayName("Gorev Aciklamasi")]
+        [DataType(DataType.MultilineText)]
         public string gorev_tanimi { get; set; }
+
+        public virtual Personel Personel { get; set; }
+        public virtual Yonetici Yonetici { get; set; }
     }
 }
