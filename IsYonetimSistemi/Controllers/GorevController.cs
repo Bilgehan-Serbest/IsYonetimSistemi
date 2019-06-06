@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using IsYonetimSistemi.Models;
 using System.Net;
+using System.Data.Entity;
 
 namespace IsYonetimSistemi.Controllers
 {
@@ -51,6 +52,39 @@ namespace IsYonetimSistemi.Controllers
                     return View("GorevAtama", isYonetim);
                 }
             }
+        }
+
+        // GET: Gorevs/Düzenle/5
+        public ActionResult GorevDuzenleme(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }            
+            Gorevlendirme gorev = db.Gorevlendirmes.Find(id);            
+            if (gorev == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.personelListesi = db.Personels.ToList();            
+            return View(gorev);
+        }
+
+        // POST: Gorevs/Düzenle/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GorevDuzenleme(int PersonelID, [Bind(Include = "gorev_id,yonetici_id,gorev_adi,gorev_tanimi")] Gorevlendirme gorev)
+        {
+            if (ModelState.IsValid)
+            {
+                gorev.personel_id = PersonelID;
+                db.Entry(gorev).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("GorevListeleme");
+            }
+            return View(gorev);
         }
 
         // GET: Gorevs/Sil/5

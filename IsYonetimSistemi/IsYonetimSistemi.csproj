@@ -1414,6 +1414,8 @@
     <Content Include="Views\Izin\IzinVerme.cshtml" />
     <Content Include="Views\Izin\IzinListeleme.cshtml" />
     <Content Include="Views\Izin\IzinSilme.cshtml" />
+    <Content Include="Views\Gorev\GorevDuzenleme.cshtml" />
+    <Content Include="Views\Izin\IzinDuzenleme.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

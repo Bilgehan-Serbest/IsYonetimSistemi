@@ -1,6 +1,7 @@
 ﻿using IsYonetimSistemi.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -54,7 +55,38 @@ namespace IsYonetimSistemi.Controllers
                 }
             }
         }
+        // GET: Izins/Düzenle/5
+        public ActionResult IzinDuzenleme(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Izin izin= db.Izins.Find(id);
+            if (izin == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.personelListesi = db.Personels.ToList();
+            return View(izin);
+        }
 
+        // POST: Izins/Düzenle/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IzinDuzenleme(int PersonelID, [Bind(Include = "izin_id,yonetici_id,izin_sebebi,izin_baslangic_tarihi,izin_bitis_tarihi")] Izin izin)
+        {
+            if (ModelState.IsValid)
+            {
+                izin.personel_id = PersonelID;
+                db.Entry(izin).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("IzinListeleme");
+            }
+            return View(izin);
+        }
         // GET: Izins/Sil/5
         public ActionResult IzinSilme(int? id)
         {

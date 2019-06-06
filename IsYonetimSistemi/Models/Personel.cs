@@ -28,11 +28,12 @@ namespace IsYonetimSistemi.Models
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string kullanici_adi { get; set; }
         [DisplayName("Parola")]
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string parola { get; set; }
         [DisplayName("Parolayi Dogrulayin")]
         [DataType(DataType.Password)]
-        [Compare("Parola")]
+        [Compare("parola")]
         public string parola_dogrula { get; set; }
         [DisplayName("Ad")]
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]

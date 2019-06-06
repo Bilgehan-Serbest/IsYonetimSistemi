@@ -54,6 +54,7 @@
                     }
                 </td>
                 <td>
+                    @Html.ActionLink("Düzenle", "GorevDuzenleme", new { id = item.gorev_id }) |
                     @Html.ActionLink("Sil", "GorevSilme", new { id = item.gorev_id })
                 </td>
             </tr>

@@ -1,51 +1,40 @@
-﻿@model IsYonetimSistemi.Models.IsYonetim
+﻿@model IsYonetimSistemi.Models.Gorevlendirme
 @using IsYonetimSistemi.Models;
 @{
-    ViewBag.Title = "IzinVerme";
+    ViewBag.Title = "GorevDuzenleme";
     Layout = "~/Views/Shared/_mainView.cshtml";
-    if (Session["yoneticiID"] == null)
-    {
-        Response.Redirect("~/YoneticiGiris/YoneticiGiris");
-    }
 }
 
-<h2>Izin Verme</h2>
+<h2>Görev Düzenleme</h2>
 
-@using (Html.BeginForm("IzinVerme", "Izin", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h4>Görev</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.gorev_id)
+
         <div class="form-group">
-            @Html.LabelFor(model => model.izinViewModel.izin_sebebi, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.gorev_adi, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.izinViewModel.izin_sebebi, new { htmlAttributes = new { @class = "form-control", @style = "width: 50%;" } })
-                @Html.ValidationMessageFor(model => model.izinViewModel.izin_sebebi, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.gorev_adi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.gorev_adi, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.izinViewModel.izin_baslangic_tarihi, htmlAttributes: new { @class = "control-label col-md-2" })
-           <div class="col-md-10">
-               @Html.EditorFor(model=>model.izinViewModel.izin_baslangic_tarihi, new { htmlAttributes = new { @type = "text", @class = "form-control", @style = "width: 50%;", @id = "izinBaslangicTarih", @name = "izinBaslangicTarih"}})
-               @Html.ValidationMessageFor(model => model.izinViewModel.izin_baslangic_tarihi, "", new { @class = "text-danger" })
-               @*<input type="text" class="form-control" style="width: 50%" id="izinBaslangicTarih" name="izinBaslangicTarih" />*@
-           </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.izinViewModel.izin_bitis_tarihi, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.gorev_tanimi, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.izinViewModel.izin_bitis_tarihi, new { htmlAttributes = new { @type = "text", @class = "form-control", @style = "width: 50%;", @id = "izinBitisTarih", @name = "izinBitisTarih"}})
-                @Html.ValidationMessageFor(model => model.izinViewModel.izin_bitis_tarihi, "", new { @class = "text-danger" })
-                @*<input type="text" class="form-control" style="width: 50%" id="izinBitisTarih" name="izinBitisTarih" />*@
+                @Html.EditorFor(model => model.gorev_tanimi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.gorev_tanimi, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="container">
-            <button type="button" style="margin-left:20px" class="btn btn-default" data-target="#personelSecModal" data-toggle="modal">Izin Verilecek Personel Seçimi</button>
+            <button type="button" style="margin-left:20px" class="btn btn-default" data-target="#personelSecModal" data-toggle="modal">Görevlendirilecek Personel Seçimi</button>
             <div class="modal" id="personelSecModal" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -54,29 +43,29 @@
                             <h4>Personel Seçimi</h4>
                         </div>
                         <div class="modal-body">
-                            <p>Lütfen izin verilecek personelleri seçiniz.</p>
+                            <p>Lütfen görevin atanacağı personeli seçiniz.</p>
 
                             <table class="table">
                                 <tr>
                                     <th>
-                                       İzin Ver
+                                        Görev Ata
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.personelViewModels[0].ad)
+                                        Ad
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.personelViewModels[0].soyad)
+                                        Soyad
                                     </th>
                                     <th></th>
                                 </tr>
-                                @{ Model.izinViewModel.yonetici_id = Convert.ToInt32(Session["yoneticiID"]);}
-                                @Html.HiddenFor(model => model.izinViewModel.yonetici_id)
+                                @{ Model.yonetici_id = Convert.ToInt32(Session["yoneticiID"]);}
+                                @Html.HiddenFor(model => model.yonetici_id)
                                 @{ int i = 0;
                                     int girisYapanYoneticiID = Convert.ToInt32(Session["YoneticiID"]);}
                                 @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
                                     {
                                         var girisYapanYonetici = dbModel.Yoneticis.Where(x => x.kullanici_id == girisYapanYoneticiID).FirstOrDefault();
-                                        Model.izinViewModel.Yonetici = new Yonetici()
+                                        Model.Yonetici = new Yonetici()
                                         {
                                             kullanici_id = girisYapanYonetici.kullanici_id,
                                             kullanici_adi = girisYapanYonetici.kullanici_adi,
@@ -89,14 +78,14 @@
                                 }
                                 @foreach (var personel in ViewBag.personelListesi)
                                 {
-                                    Model.personelViewModels.Add((IsYonetimSistemi.Models.Personel)personel);
+                                    //Model.personelViewModels.Add((IsYonetimSistemi.Models.Personel)personel);
                                     <tr>
                                         <td>
-                                            <input type="checkbox" name="PersonelIDs" value="@personel.kullanici_id" />
+                                            <input type="radio" name="PersonelID" value="@personel.kullanici_id" />
                                             @*@Html.CheckBoxFor(model => model.personelViewModels[i].gorevChecked)*@
 
-                                            @*@{ Model.gorevlendirmeViewModel.personel_id = personel.kullanici_id;}
-                                                @Html.HiddenFor(model => model.gorevlendirmeViewModel.personel_id)*@
+                                            @*@{ Model.personel_id = personel.kullanici_id;}
+                                            @Html.HiddenFor(model => model.personel_id)*@
                                         </td>
 
                                         <td>
@@ -112,7 +101,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" value="Izin ver" class="btn btn-default" />
+                            <input type="submit" value="Görev Duzenle" class="btn btn-default" />
                         </div>
                     </div>
                 </div>
@@ -129,34 +118,13 @@
             </div>
         </div>
         <br />
-
-
     </div>
-                                    }
+}
+
+<div>
+    @Html.ActionLink("Gorev Listesine Dön", "GorevListeleme")
+</div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script>
-    $(document).ready(function()
-    {
-        $('#izinBaslangicTarih').datepicker({
-            format: 'yyyy-mm-dd'
-        });        
-    })
-</script>
-<script>
-    $(document).ready(function () {
-        $('#izinBitisTarih').datepicker({
-            format: 'yyyy-mm-dd'
-        });        
-    })
-</script>
-
-
-
-@*<script src="~/Scripts/jquery-ui.min.js"></script>
-<link href="@Url.Content("~Style/css/jquery-ui.min.css")" rel="stylesheet" type="text/css">*@
-
-
-
