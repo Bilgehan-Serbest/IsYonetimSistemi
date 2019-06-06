@@ -28,5 +28,6 @@ namespace IsYonetimSistemi.Models
         public virtual DbSet<Gorevlendirme> Gorevlendirmes { get; set; }
         public virtual DbSet<Personel> Personels { get; set; }
         public virtual DbSet<Yonetici> Yoneticis { get; set; }
+        public virtual DbSet<Izin> Izins { get; set; }
     }
 }

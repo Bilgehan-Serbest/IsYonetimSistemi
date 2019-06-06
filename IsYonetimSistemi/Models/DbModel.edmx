@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IsYonetimDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IsYonetimDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Gorevlendirme">
           <Key>
             <PropertyRef Name="gorev_id" />
@@ -14,6 +14,17 @@
           <Property Name="yonetici_id" Type="int" Nullable="false" />
           <Property Name="gorev_adi" Type="varchar" MaxLength="50" />
           <Property Name="gorev_tanimi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Izin">
+          <Key>
+            <PropertyRef Name="izin_id" />
+          </Key>
+          <Property Name="izin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personel_id" Type="int" Nullable="false" />
+          <Property Name="yonetici_id" Type="int" Nullable="false" />
+          <Property Name="izin_sebebi" Type="varchar" MaxLength="50" />
+          <Property Name="izin_baslangic_tarihi" Type="date" Nullable="false" />
+          <Property Name="izin_bitis_tarihi" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -39,6 +50,30 @@
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="maas" Type="int" />
         </EntityType>
+        <Association Name="fk_izin_veren_yonetici">
+          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
+          <End Role="Izin" Type="Self.Izin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetici">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Izin">
+              <PropertyRef Name="yonetici_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_izinli_personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
+          <End Role="Izin" Type="Self.Izin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Izin">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_personel">
           <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
           <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
@@ -65,8 +100,17 @@
         </Association>
         <EntityContainer Name="IsYonetimDBModelStoreContainer">
           <EntitySet Name="Gorevlendirme" EntityType="Self.Gorevlendirme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Izin" EntityType="Self.Izin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_izin_veren_yonetici" Association="Self.fk_izin_veren_yonetici">
+            <End Role="Yonetici" EntitySet="Yonetici" />
+            <End Role="Izin" EntitySet="Izin" />
+          </AssociationSet>
+          <AssociationSet Name="fk_izinli_personel" Association="Self.fk_izinli_personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Izin" EntitySet="Izin" />
+          </AssociationSet>
           <AssociationSet Name="fk_personel" Association="Self.fk_personel">
             <End Role="Personel" EntitySet="Personel" />
             <End Role="Gorevlendirme" EntitySet="Gorevlendirme" />
@@ -76,8 +120,7 @@
             <End Role="Gorevlendirme" EntitySet="Gorevlendirme" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IsYonetimDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -105,6 +148,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="maas" Type="Int32" />
           <NavigationProperty Name="Gorevlendirmes" Relationship="Self.fk_personel" FromRole="Personel" ToRole="Gorevlendirme" />
+          <NavigationProperty Name="Izins" Relationship="IsYonetimDBModel.fk_izinli_personel" FromRole="Personel" ToRole="Izin" />
         </EntityType>
         <EntityType Name="Yonetici">
           <Key>
@@ -118,6 +162,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="maas" Type="Int32" />
           <NavigationProperty Name="Gorevlendirmes" Relationship="Self.fk_yonetici" FromRole="Yonetici" ToRole="Gorevlendirme" />
+          <NavigationProperty Name="Izins" Relationship="IsYonetimDBModel.fk_izin_veren_yonetici" FromRole="Yonetici" ToRole="Izin" />
         </EntityType>
         <Association Name="fk_personel">
           <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
@@ -155,7 +200,53 @@
             <End Role="Yonetici" EntitySet="Yoneticis" />
             <End Role="Gorevlendirme" EntitySet="Gorevlendirmes" />
           </AssociationSet>
+          <EntitySet Name="Izins" EntityType="IsYonetimDBModel.Izin" />
+          <AssociationSet Name="fk_izin_veren_yonetici" Association="IsYonetimDBModel.fk_izin_veren_yonetici">
+            <End Role="Yonetici" EntitySet="Yoneticis" />
+            <End Role="Izin" EntitySet="Izins" />
+          </AssociationSet>
+          <AssociationSet Name="fk_izinli_personel" Association="IsYonetimDBModel.fk_izinli_personel">
+            <End Role="Personel" EntitySet="Personels" />
+            <End Role="Izin" EntitySet="Izins" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Izin">
+          <Key>
+            <PropertyRef Name="izin_id" />
+          </Key>
+          <Property Name="izin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personel_id" Type="Int32" Nullable="false" />
+          <Property Name="yonetici_id" Type="Int32" Nullable="false" />
+          <Property Name="izin_sebebi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="izin_baslangic_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="izin_bitis_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Yonetici" Relationship="IsYonetimDBModel.fk_izin_veren_yonetici" FromRole="Izin" ToRole="Yonetici" />
+          <NavigationProperty Name="Personel" Relationship="IsYonetimDBModel.fk_izinli_personel" FromRole="Izin" ToRole="Personel" />
+        </EntityType>
+        <Association Name="fk_izin_veren_yonetici">
+          <End Type="IsYonetimDBModel.Yonetici" Role="Yonetici" Multiplicity="1" />
+          <End Type="IsYonetimDBModel.Izin" Role="Izin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetici">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Izin">
+              <PropertyRef Name="yonetici_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_izinli_personel">
+          <End Type="IsYonetimDBModel.Personel" Role="Personel" Multiplicity="1" />
+          <End Type="IsYonetimDBModel.Izin" Role="Izin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="Izin">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -196,6 +287,18 @@
                 <ScalarProperty Name="soyad" ColumnName="soyad" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="maas" ColumnName="maas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Izins">
+            <EntityTypeMapping TypeName="IsYonetimDBModel.Izin">
+              <MappingFragment StoreEntitySet="Izin">
+                <ScalarProperty Name="izin_bitis_tarihi" ColumnName="izin_bitis_tarihi" />
+                <ScalarProperty Name="izin_baslangic_tarihi" ColumnName="izin_baslangic_tarihi" />
+                <ScalarProperty Name="izin_sebebi" ColumnName="izin_sebebi" />
+                <ScalarProperty Name="yonetici_id" ColumnName="yonetici_id" />
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="izin_id" ColumnName="izin_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

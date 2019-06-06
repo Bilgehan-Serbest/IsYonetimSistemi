@@ -24,7 +24,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="../../index2.html" class="logo">
+            <a href="@Url.Action("Index", "Home")" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>LT</span>
                 <!-- logo for regular state and mobile devices -->
@@ -81,6 +81,18 @@
                         <ul class="treeview-menu">                            
                             <li><a href="@Url.Action("GorevAtama", "Gorev")"><i class="fa fa-circle-o"></i>Görev Atama</a></li>
                             <li><a href="@Url.Action("GorevListeleme", "Gorev")"><i class="fa fa-circle-o"></i>Mevcut Görev Listesi</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>İzin Yönetimi</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("IzinVerme", "Izin")"><i class="fa fa-circle-o"></i>İzin Atama</a></li>
+                            <li><a href="@Url.Action("IzinListeleme", "Izin")"><i class="fa fa-circle-o"></i>Mevcut İzin Listesi</a></li>
                         </ul>
                     </li>
                     <li>

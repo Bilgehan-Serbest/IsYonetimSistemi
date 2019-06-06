@@ -20,6 +20,7 @@ namespace IsYonetimSistemi.Models
         public Yonetici()
         {
             this.Gorevlendirmes = new HashSet<Gorevlendirme>();
+            this.Izins = new HashSet<Izin>();
         }
 
         public int kullanici_id { get; set; }
@@ -48,5 +49,7 @@ namespace IsYonetimSistemi.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gorevlendirme> Gorevlendirmes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Izin> Izins { get; set; }
     }
 }

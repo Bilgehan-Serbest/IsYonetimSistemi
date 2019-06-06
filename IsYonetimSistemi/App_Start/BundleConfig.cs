@@ -18,12 +18,15 @@ namespace IsYonetimSistemi.App_Start
                 "~/Content/plugins/slimScroll/jquery.slimscroll.min.js",
                 "~/Content/plugins/fastclick/fastclick.js",
                 "~/Content/dist/js/app.min.js",
-                "~/Content/dist/js/demo.js"));
+                "~/Content/dist/js/demo.js",
+                "~/Content/bootstrap/js/bootstrap-datepicker.js",
+                "~/Content/bootstrap/js/moment.js"));
 
             bundles.Add(new StyleBundle("~/Css").Include(
                       "~/Content/bootstrap/css/bootstrap.min.css",
                       "~/Content/dist/css/AdminLTE.min.css",
-                      "~/Content/dist/css/skins/_all-skins.min.css"));
+                      "~/Content/dist/css/skins/_all-skins.min.css",
+                      "~/Content/bootstrap/css/bootstrap-datepicker.css"));
             BundleTable.EnableOptimizations = true;
         }
     }

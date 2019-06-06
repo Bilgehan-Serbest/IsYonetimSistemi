@@ -20,8 +20,9 @@ namespace IsYonetimSistemi.Models
         public Personel()
         {
             this.Gorevlendirmes = new HashSet<Gorevlendirme>();
+            this.Izins = new HashSet<Izin>();
         }
-    
+
         public int kullanici_id { get; set; }
         [DisplayName("Kullanici Adi")]
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
@@ -32,7 +33,7 @@ namespace IsYonetimSistemi.Models
         [DisplayName("Parolayi Dogrulayin")]
         [DataType(DataType.Password)]
         [Compare("Parola")]
-        public string parola_dogrula{ get; set; }
+        public string parola_dogrula { get; set; }
         [DisplayName("Ad")]
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public string ad { get; set; }
@@ -45,8 +46,10 @@ namespace IsYonetimSistemi.Models
         [DisplayName("Maas")]
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public Nullable<int> maas { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gorevlendirme> Gorevlendirmes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Izin> Izins { get; set; }
     }
 }

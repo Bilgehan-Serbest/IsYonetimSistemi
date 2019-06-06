@@ -4,12 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="df2b005193e54681a6b4e7a65c0afbe9" Name="Diagram1">
-        <EntityTypeShape EntityType="IsYonetimDBModel.Gorevlendirme" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="IsYonetimDBModel.Personel" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="IsYonetimDBModel.Yonetici" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+      <Diagram DiagramId="df2b005193e54681a6b4e7a65c0afbe9" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="IsYonetimDBModel.Gorevlendirme" Width="1.5" PointX="6.625" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IsYonetimDBModel.Personel" Width="1.5" PointX="11.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IsYonetimDBModel.Yonetici" Width="1.5" PointX="1.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="IsYonetimDBModel.fk_personel" ManuallyRouted="false" />
         <AssociationConnector Association="IsYonetimDBModel.fk_yonetici" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="IsYonetimDBModel.Izin" Width="1.5" PointX="6.625" PointY="4.375" />
+        <AssociationConnector Association="IsYonetimDBModel.fk_izin_veren_yonetici" />
+        <AssociationConnector Association="IsYonetimDBModel.fk_izinli_personel" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -53,7 +53,7 @@ namespace IsYonetimSistemi.Controllers
             }
         }
 
-        // GET: Personels/Sil/5
+        // GET: Gorevs/Sil/5
         public ActionResult GorevSilme(int? id)
         {
             if (id == null)
@@ -68,7 +68,7 @@ namespace IsYonetimSistemi.Controllers
             return View(gorev);
         }
 
-        // POST: Personels/Sil/5
+        // POST: Gorevs/Sil/5
         [HttpPost, ActionName("GorevSilme")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

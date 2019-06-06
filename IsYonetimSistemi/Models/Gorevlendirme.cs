@@ -24,7 +24,7 @@ namespace IsYonetimSistemi.Models
         [DisplayName("Gorev Tanimi")]
         [DataType(DataType.MultilineText)]
         public string gorev_tanimi { get; set; }
-    
+
         public virtual Personel Personel { get; set; }
         public virtual Yonetici Yonetici { get; set; }
     }
