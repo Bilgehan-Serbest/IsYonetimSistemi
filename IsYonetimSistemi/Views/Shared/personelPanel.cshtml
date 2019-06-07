@@ -1,9 +1,9 @@
 ﻿
 @{
     Layout = null;
-    if (Session["yoneticiID"] == null)
+    if (Session["personelID"] == null)
     {
-        Response.Redirect("~/YoneticiGiris/YoneticiGiris");
+        Response.Redirect("~/Giris/PersonelGiris");
     }
 }
 
@@ -24,7 +24,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="@Url.Action("Index", "Home")" class="logo">
+            <a href="@Url.Action("PersonelAnaSayfa", "Home")" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>LT</span>
                 <!-- logo for regular state and mobile devices -->
@@ -51,53 +51,19 @@
                         <img src="~/Content/dist/img/useravatar.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>@Session["yoneticiAd"].ToString() @Session["yoneticiSoyad"].ToString()</p>
+                        <p>@Session["personelAd"].ToString() @Session["personelSoyad"].ToString()</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
-                </div>                
+                </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
-                    <li class="header">YÖNETİM PANELİ</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Kayıt İşlemleri</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("PersonelKayit", "PersonelKayit")"><i class="fa fa-circle-o"></i> Yeni Personel Kaydı</a></li>
-                            <li><a href="@Url.Action("YoneticiKayit", "YoneticiKayit")"><i class="fa fa-circle-o"></i>Yeni Yönetici Kaydı</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="@Url.Action("Index", "Personel")"><i class="fa fa-circle-o"></i>Personel Listesi</a></li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Görev Yönetimi</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">                            
-                            <li><a href="@Url.Action("GorevAtama", "Gorev")"><i class="fa fa-circle-o"></i>Görev Atama</a></li>
-                            <li><a href="@Url.Action("GorevListeleme", "Gorev")"><i class="fa fa-circle-o"></i>Mevcut Görev Listesi</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>İzin Yönetimi</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("IzinVerme", "Izin")"><i class="fa fa-circle-o"></i>İzin Atama</a></li>
-                            <li><a href="@Url.Action("IzinListeleme", "Izin")"><i class="fa fa-circle-o"></i>Mevcut İzin Listesi</a></li>
-                        </ul>
-                    </li>
+                    <li class="header">PERSONEL PANELİ</li>                    
+                    <li><a href="@Url.Action("PersonelListesi_p", "Personel")"><i class="fa fa-circle-o"></i>Personel Listesi</a></li>
+                    <li><a href="@Url.Action("PersonelGorevleri", "Personel")"><i class="fa fa-circle-o"></i>Mevcut Görevler</a></li>
+                    <li><a href="@Url.Action("PersonelIzinleri", "Personel")"><i class="fa fa-circle-o"></i>Mevcut İzinler</a></li>                    
                     <li>
-                        <a href="@Url.Action("CikisYap", "YoneticiGiris")">
-                            <i class="fa fa-calendar"></i> <span>Çıkış</span>                           
+                        <a href="@Url.Action("PersonelCikis", "Giris")">
+                            <i class="fa fa-calendar"></i> <span>Çıkış</span>
                         </a>
                     </li>
                 </ul>
@@ -109,7 +75,7 @@
         <div class="content-wrapper">
             @RenderBody()
         </div>
-        <!-- /.content-wrapper -->      
+        <!-- /.content-wrapper -->
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->

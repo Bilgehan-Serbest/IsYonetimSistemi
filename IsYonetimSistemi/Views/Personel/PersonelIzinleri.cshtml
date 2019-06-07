@@ -1,17 +1,14 @@
 ﻿@model List<IsYonetimSistemi.Models.Izin>
 @using IsYonetimSistemi.Models;
 @{
-    ViewBag.Title = "IzinListeleme";
-    Layout = "~/Views/Shared/yoneticiPanel.cshtml";
+    ViewBag.Title = "PersonelIzinleri";
+    Layout = "~/Views/Shared/personelPanel.cshtml";
 }
 
 <h2>Izin Listeleme</h2>
 
 <table class="table">
     <tr>
-        <th>
-            İzinli Personel
-        </th>
         <th>
             İzin Sebebi
         </th>
@@ -20,7 +17,7 @@
         </th>
         <th>
             İzin Bitiş Tarihi
-        </th>        
+        </th>
         <th>
             İzin Veren Yönetici
         </th>
@@ -31,16 +28,6 @@
     {
         <tr>
             <td>
-                @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
-                    {
-                        var izinliPersonel = dbModel.Personels.Where(x => x.kullanici_id == item.personel_id).FirstOrDefault();
-                        @izinliPersonel.ad;
-                        <br />
-                        @izinliPersonel.soyad;
-                    }
-                }
-            </td>
-            <td>
                 @item.izin_sebebi
             </td>
             <td>
@@ -48,7 +35,7 @@
             </td>
             <td>
                 @item.izin_bitis_tarihi
-            </td>           
+            </td>
             <td>
                 @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
                     {
@@ -59,12 +46,7 @@
                     }
                 }
             </td>
-            <td>
-                @Html.ActionLink("Düzenle", "IzinDuzenleme", new { id = item.izin_id}) |
-                @Html.ActionLink("Sil", "IzinSilme", new { id = item.izin_id})
-            </td>
         </tr>
     }
 
 </table>
-

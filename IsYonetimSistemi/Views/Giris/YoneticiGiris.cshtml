@@ -31,7 +31,7 @@
             ViewBag.Title = "YoneticiGiris";
         }
 
-        @using (Html.BeginForm("GirisYap", "YoneticiGiris", FormMethod.Post))
+        @using (Html.BeginForm("YoneticiGiris", "Giris", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <body>

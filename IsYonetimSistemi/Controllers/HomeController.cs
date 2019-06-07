@@ -7,9 +7,16 @@ using System.Web.Mvc;
 namespace IsYonetimSistemi.Controllers
 {
     public class HomeController : Controller
-    {
-        // GET: Home
-        public ActionResult Index()
+    {        
+        public ActionResult YoneticiAnaSayfa()
+        {
+            return View();
+        }
+        public ActionResult PersonelAnaSayfa()
+        {
+            return View();
+        }
+        public ActionResult GirisSecim()
         {
             return View();
         }

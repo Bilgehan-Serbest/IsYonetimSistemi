@@ -1,0 +1,47 @@
+﻿@model List<IsYonetimSistemi.Models.Gorevlendirme>
+@using IsYonetimSistemi.Models;
+@{
+    ViewBag.Title = "PersonelGorevleri";
+    Layout = "~/Views/Shared/personelPanel.cshtml";
+}
+
+<h2>Gorev Listeleme</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Görev Adı
+        </th>
+        <th>
+            Görev Tanımı
+        </th>        
+        <th>
+            Görevi Atayan Yönetici
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.gorev_adi
+            </td>
+            <td>
+                @item.gorev_tanimi
+            </td>            
+            <td>
+                @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
+                    {
+                        var gorevAtayanYonetici = dbModel.Yoneticis.Where(x => x.kullanici_id == item.yonetici_id).FirstOrDefault();
+                        @gorevAtayanYonetici.ad;
+                        <br />
+                            @gorevAtayanYonetici.soyad;
+                    }
+                }
+            </td>
+        </tr>
+                    }
+
+</table>
+

@@ -1287,8 +1287,8 @@
     <Content Include="Style\vendor\select2\select2.min.css" />
     <Content Include="Style\vendor\select2\select2.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Shared\_mainView.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\yoneticiPanel.cshtml" />
+    <Content Include="Views\Home\YoneticiAnaSayfa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -1298,7 +1298,7 @@
     <Compile Include="Controllers\IzinController.cs" />
     <Compile Include="Controllers\PersonelController.cs" />
     <Compile Include="Controllers\PersonelKayitController.cs" />
-    <Compile Include="Controllers\YoneticiGirisController.cs" />
+    <Compile Include="Controllers\GirisController.cs" />
     <Compile Include="Controllers\YoneticiKayitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1340,7 +1340,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\YoneticiGiris\YoneticiGiris.cshtml" />
+    <Content Include="Views\Giris\YoneticiGiris.cshtml" />
     <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -1416,6 +1416,13 @@
     <Content Include="Views\Izin\IzinSilme.cshtml" />
     <Content Include="Views\Gorev\GorevDuzenleme.cshtml" />
     <Content Include="Views\Izin\IzinDuzenleme.cshtml" />
+    <Content Include="Views\Home\GirisSecim.cshtml" />
+    <Content Include="Views\Giris\PersonelGiris.cshtml" />
+    <Content Include="Views\Shared\personelPanel.cshtml" />
+    <Content Include="Views\Personel\PersonelGorevleri.cshtml" />
+    <Content Include="Views\Personel\PersonelIzinleri.cshtml" />
+    <Content Include="Views\Home\PersonelAnaSayfa.cshtml" />
+    <Content Include="Views\Personel\PersonelListesi_p.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

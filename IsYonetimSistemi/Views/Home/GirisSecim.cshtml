@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="~/style/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/style/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/style/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/style/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/style/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/style/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="~/style/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/style/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/style/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/style/css/main.css">
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div>        
+        @{
+            ViewBag.Title = "Giris Secim";
+            Layout = null;
+        }
+
+        <body>                
+            <div class="limiter">
+                <div class="container-login100">
+                    <div class="wrap-login100">
+                        <form class="login100-form validate-form">
+                            <span class="login100-form-title p-b-26">
+                                Hoşgeldiniz
+                            </span>
+                            <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+                                    <a type="button" value="personelGiris" class="login100-form-btn" href=@Url.Action("PersonelGiris", "Giris")>
+                                        Personel Girişi
+                                    </a>                                    
+                                </div>
+                            </div>
+                            <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+
+                                    <a type="button" value="yoneticiGiris" class="login100-form-btn" href=@Url.Action("YoneticiGiris", "Giris")>
+                                        Yönetici Girişi
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                            @*<div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <button type="button" value="yoneticiGiris" class="login100-form-btn" onclick="window.location.href='<%= Url.Action(" YoneticiGiris", "YoneticiGiris" ) %>
+                                        Yönetici Girişi
+                                    </button>
+                                </div>
+                            </div>*@
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="dropDownSelect1"></div>
+        </body>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Style/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Style/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/Style/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Style/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Style/vendor/select2/select2.min.js"></script>
+    <script src="~/Style/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Style/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Style/vendor/countdowntime/countdowntime.js"></script>
+    <script src="~/Style/js/main.js"></script>
+</body>
+</html>

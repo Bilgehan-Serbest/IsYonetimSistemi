@@ -17,6 +17,35 @@ namespace IsYonetimSistemi.Controllers
         {
             return View(db.Personels.ToList());
         }
+        public ActionResult PersonelListesi_p()
+        {
+            return View(db.Personels.ToList());
+        }
+
+        public ActionResult PersonelGorevleri()
+        {
+            int personelID = (int)System.Web.HttpContext.Current.Session["personelID"];
+            List<Gorevlendirme> tumGorevler = db.Gorevlendirmes.ToList();
+            List<Gorevlendirme> personelGorevleri = new List<Gorevlendirme>();
+            foreach (Gorevlendirme gorev in tumGorevler){
+                if (gorev.personel_id == personelID)
+                    personelGorevleri.Add(gorev);
+            }
+            return View(personelGorevleri);
+        }
+
+        public ActionResult PersonelIzinleri()
+        {
+            int personelID = (int)System.Web.HttpContext.Current.Session["personelID"];
+            List<Izin> tumIzinler = db.Izins.ToList();
+            List<Izin> personelIzinleri = new List<Izin>();
+            foreach (Izin izin in tumIzinler)
+            {
+                if (izin.personel_id == personelID)
+                    personelIzinleri.Add(izin);
+            }
+            return View(personelIzinleri);
+        }
         public ActionResult Detay(int? id)
         {
             if (id == null)
