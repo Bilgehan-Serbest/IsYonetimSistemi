@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IsYonetimSistemi.Models;
+using System.Web.Helpers;
+
 
 namespace IsYonetimSistemi.Controllers
 {
@@ -26,6 +28,8 @@ namespace IsYonetimSistemi.Controllers
                     return View("PersonelKayit", personelModel);
                 }
 
+                personelModel.parola = Crypto.Hash(personelModel.parola);
+                personelModel.parola_dogrula = Crypto.Hash(personelModel.parola_dogrula);
                 dbModel.Personels.Add(personelModel);
                 dbModel.SaveChanges();
 

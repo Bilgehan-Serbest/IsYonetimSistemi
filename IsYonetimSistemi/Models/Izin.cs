@@ -29,7 +29,7 @@ namespace IsYonetimSistemi.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-mm-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime izin_bitis_tarihi { get; set; }
-    
+
         public virtual Yonetici Yonetici { get; set; }
         public virtual Personel Personel { get; set; }
     }

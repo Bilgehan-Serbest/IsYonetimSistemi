@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IsYonetimSistemi.Models;
+using System.Web.Helpers;
 
 namespace IsYonetimSistemi.Controllers
 {
@@ -25,7 +26,8 @@ namespace IsYonetimSistemi.Controllers
                     ViewBag.DuplicateMessage = "Kullanıcı adı bir başka kullanıcı tarafından kullanılıyor.";
                     return View("YoneticiKayit", yoneticiModel);
                 }
-
+                yoneticiModel.parola_dogrula = Crypto.Hash(yoneticiModel.parola_dogrula);
+                yoneticiModel.parola = Crypto.Hash(yoneticiModel.parola);
                 dbModel.Yoneticis.Add(yoneticiModel);
                 dbModel.SaveChanges();
 

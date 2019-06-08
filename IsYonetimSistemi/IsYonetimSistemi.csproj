@@ -1296,6 +1296,7 @@
     <Compile Include="Controllers\GorevController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzinController.cs" />
+    <Compile Include="Controllers\MultipleButtonAttribute.cs" />
     <Compile Include="Controllers\PersonelController.cs" />
     <Compile Include="Controllers\PersonelKayitController.cs" />
     <Compile Include="Controllers\GirisController.cs" />

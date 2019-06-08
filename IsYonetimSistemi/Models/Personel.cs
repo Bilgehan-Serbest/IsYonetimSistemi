@@ -48,6 +48,7 @@ namespace IsYonetimSistemi.Models
         [Required(ErrorMessage = "Bu alanin doldurulmasi gereklidir.")]
         public Nullable<int> maas { get; set; }
 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gorevlendirme> Gorevlendirmes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

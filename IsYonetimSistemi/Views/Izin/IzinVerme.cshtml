@@ -140,16 +140,14 @@
 <script>
     $(document).ready(function()
     {
-        $('#izinBaslangicTarih').datepicker({
-            format: 'yyyy-mm-dd'
-        });        
+        $('#izinBaslangicTarih').datepicker({ format: 'yyyy-mm-dd' });        
+        $('#izinBaslangicTarih').datepicker("setDate", new Date());
     })
 </script>
 <script>
     $(document).ready(function () {
-        $('#izinBitisTarih').datepicker({
-            format: 'yyyy-mm-dd'
-        });        
+        $('#izinBitisTarih').datepicker({ format: 'yyyy-mm-dd' });        
+        $('#izinBitisTarih').datepicker("setDate", new Date());
     })
 </script>
 
