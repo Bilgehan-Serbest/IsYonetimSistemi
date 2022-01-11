@@ -25,9 +25,9 @@ namespace IsYonetimSistemi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Gorevlendirme> Gorevlendirmes { get; set; }
-        public virtual DbSet<Personel> Personels { get; set; }
-        public virtual DbSet<Yonetici> Yoneticis { get; set; }
-        public virtual DbSet<Izin> Izins { get; set; }
+        public virtual DbSet<Task> Tasks { get; set; }
+        public virtual DbSet<Personnel> Personnels { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
+        public virtual DbSet<Leave> Leaves { get; set; }
     }
 }

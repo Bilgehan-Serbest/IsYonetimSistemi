@@ -1,0 +1,160 @@
+﻿@model IsYonetimSistemi.Models.IsYonetim
+@using IsYonetimSistemi.Models;
+@{
+    ViewBag.Title = "GiveLeave";
+    Layout = "~/Views/Shared/managerPanel.cshtml";
+    if (Session["managerID"] == null)
+    {
+        Response.Redirect("~/Login/ManagerLogin");
+    }
+}
+
+<h2>Izin Verme</h2>
+
+@using (Html.BeginForm("GiveLeave", "Leave", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group" style="margin-top:100px">
+            @Html.LabelFor(model => model.leaveViewModel.leave_reason, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.leaveViewModel.leave_reason, new { htmlAttributes = new { @class = "form-control", @style = "width: 50%;" } })
+                @Html.ValidationMessageFor(model => model.leaveViewModel.leave_reason, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.leaveViewModel.leave_start_date, htmlAttributes: new { @class = "control-label col-md-2" })
+           <div class="col-md-4">
+               @Html.EditorFor(model=>model.leaveViewModel.leave_start_date, new { htmlAttributes = new { @type = "text", @class = "form-control", @style = "width: 50%;", @id = "izinBaslangicTarih", @name = "izinBaslangicTarih"}})
+               @Html.ValidationMessageFor(model => model.leaveViewModel.leave_start_date, "", new { @class = "text-danger" })
+               @*<input type="text" class="form-control" style="width: 50%" id="izinBaslangicTarih" name="izinBaslangicTarih" />*@
+           </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.leaveViewModel.leave_end_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.leaveViewModel.leave_end_date, new { htmlAttributes = new { @type = "text", @class = "form-control", @style = "width: 50%;", @id = "izinBitisTarih", @name = "izinBitisTarih"}})
+                @Html.ValidationMessageFor(model => model.leaveViewModel.leave_end_date, "", new { @class = "text-danger" })
+                @*<input type="text" class="form-control" style="width: 50%" id="izinBitisTarih" name="izinBitisTarih" />*@
+            </div>
+        </div>
+
+        <div class="container">
+            <button type="button" style="margin-left:20px" class="btn btn-default" data-target="#personelSecModal" data-toggle="modal">Izin Verilecek Personel Seçimi</button>
+            <div class="modal" id="personelSecModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h4>Personel Seçimi</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Lütfen izin verilecek personelleri seçiniz.</p>
+
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                       İzin Ver
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.personnelViewModels[0].first_name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.personnelViewModels[0].last_name)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                @{ Model.leaveViewModel.manager_id = Convert.ToInt32(Session["managerID"]);}
+                                @Html.HiddenFor(model => model.leaveViewModel.manager_id)
+                                @{ int i = 0;
+                                    int girisYapanYoneticiID = Convert.ToInt32(Session["managerID"]);}
+                                @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
+                                    {
+                                        var girisYapanYonetici = dbModel.Managers.Where(x => x.user_id== girisYapanYoneticiID).FirstOrDefault();
+                                        Model.leaveViewModel.Manager = new Manager()
+                                        {
+                                            user_id = girisYapanYonetici.user_id,
+                                            username = girisYapanYonetici.username,
+                                            first_name = girisYapanYonetici.first_name,
+                                            last_name = girisYapanYonetici.last_name,
+                                            email = girisYapanYonetici.email,
+                                            salary = girisYapanYonetici.salary
+                                        };
+                                    }
+                                }
+                                @foreach (var personnel in ViewBag.personnelList)
+                                {
+                                    Model.personnelViewModels.Add((IsYonetimSistemi.Models.Personnel)personnel);
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="PersonnelIDs" value="@personnel.user_id" />
+                                            @*@Html.CheckBoxFor(model => model.personelViewModels[i].gorevChecked)*@
+
+                                            @*@{ Model.gorevlendirmeViewModel.personel_id = personel.kullanici_id;}
+                                                @Html.HiddenFor(model => model.gorevlendirmeViewModel.personel_id)*@
+                                        </td>
+
+                                        <td>
+                                            @personnel.first_name
+                                        </td>
+
+                                        <td>
+                                            @personnel.last_name
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Izin ver" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <label class="label-success">@ViewBag.SuccessMessage</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <label class="label-danger">@ViewBag.DuplicateMessage</label>
+                </div>
+            </div>
+        </div>
+        <br />
+
+
+    </div>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function()
+    {
+        $('#izinBaslangicTarih').datepicker({ format: 'yyyy-mm-dd' });        
+        $('#izinBaslangicTarih').datepicker("setDate", new Date());
+    })
+</script>
+<script>
+    $(document).ready(function () {
+        $('#izinBitisTarih').datepicker({ format: 'yyyy-mm-dd' });        
+        $('#izinBitisTarih').datepicker("setDate", new Date());
+    })
+</script>
+
+
+
+@*<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="@Url.Content("~Style/css/jquery-ui.min.css")" rel="stylesheet" type="text/css">*@
+
+
+

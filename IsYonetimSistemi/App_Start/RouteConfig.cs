@@ -16,7 +16,7 @@ namespace IsYonetimSistemi
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "GirisSecim", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "SelectLogin", id = UrlParameter.Optional }
             );
         }
     }

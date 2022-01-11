@@ -1,0 +1,55 @@
+﻿@model IsYonetimSistemi.Models.Personnel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/managerPanel.cshtml";
+}
+
+<h2>Personel Detayları</h2>
+
+<div>
+    <h4>Personel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salary)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.user_id }) |
+    @Html.ActionLink("Personel Listesine Dön", "Index")
+</p>
+
+

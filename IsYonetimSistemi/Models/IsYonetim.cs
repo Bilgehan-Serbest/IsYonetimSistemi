@@ -7,18 +7,18 @@ namespace IsYonetimSistemi.Models
 {
     public class IsYonetim
     {
-        public List<Personel> personelViewModels { get; set; }
-        public Yonetici yoneticiViewModel { get; set; }
-        public Gorevlendirme gorevlendirmeViewModel { get; set; }
-        public Izin izinViewModel { get; set; }
-        public List<int> gorevlendirilecekPersonelIdList { get; set; }
+        public List<Personnel> personnelViewModels { get; set; }
+        public Manager managerViewModel { get; set; }
+        public Task taskViewModel { get; set; }
+        public Leave leaveViewModel { get; set; }
+        public List<int> personnelToTaskIdList { get; set; }
 
         public IsYonetim()
         {
-            this.personelViewModels = new List<Personel>();
-            this.yoneticiViewModel = new Yonetici();
-            this.gorevlendirmeViewModel = new Gorevlendirme();
-            this.izinViewModel = new Izin();
+            this.personnelViewModels = new List<Personnel>();
+            this.managerViewModel = new Manager();
+            this.taskViewModel = new Task();
+            this.leaveViewModel = new Leave();
         }
     }    
 }

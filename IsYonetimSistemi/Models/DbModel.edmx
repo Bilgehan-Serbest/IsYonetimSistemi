@@ -4,246 +4,246 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IsYonetimDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Gorevlendirme">
-          <Key>
-            <PropertyRef Name="gorev_id" />
-          </Key>
-          <Property Name="gorev_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="personel_id" Type="int" Nullable="false" />
-          <Property Name="yonetici_id" Type="int" Nullable="false" />
-          <Property Name="gorev_adi" Type="varchar" MaxLength="50" />
-          <Property Name="gorev_tanimi" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Izin">
-          <Key>
-            <PropertyRef Name="izin_id" />
-          </Key>
-          <Property Name="izin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="personel_id" Type="int" Nullable="false" />
-          <Property Name="yonetici_id" Type="int" Nullable="false" />
-          <Property Name="izin_sebebi" Type="varchar" MaxLength="50" />
-          <Property Name="izin_baslangic_tarihi" Type="date" Nullable="false" />
-          <Property Name="izin_bitis_tarihi" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Personel">
-          <Key>
-            <PropertyRef Name="kullanici_id" />
-          </Key>
-          <Property Name="kullanici_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="kullanici_adi" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="parola" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="ad" Type="varchar" MaxLength="50" />
-          <Property Name="soyad" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
-          <Property Name="maas" Type="int" />
-        </EntityType>
-        <EntityType Name="Yonetici">
-          <Key>
-            <PropertyRef Name="kullanici_id" />
-          </Key>
-          <Property Name="kullanici_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="kullanici_adi" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="parola" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="ad" Type="varchar" MaxLength="50" />
-          <Property Name="soyad" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
-          <Property Name="maas" Type="int" />
-        </EntityType>
-        <Association Name="fk_izin_veren_yonetici">
-          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
-          <End Role="Izin" Type="Self.Izin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Yonetici">
-              <PropertyRef Name="kullanici_id" />
-            </Principal>
-            <Dependent Role="Izin">
-              <PropertyRef Name="yonetici_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_izinli_personel">
-          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
-          <End Role="Izin" Type="Self.Izin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personel">
-              <PropertyRef Name="kullanici_id" />
-            </Principal>
-            <Dependent Role="Izin">
-              <PropertyRef Name="personel_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_personel">
-          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
-          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personel">
-              <PropertyRef Name="kullanici_id" />
-            </Principal>
-            <Dependent Role="Gorevlendirme">
-              <PropertyRef Name="personel_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_yonetici">
-          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
-          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Yonetici">
-              <PropertyRef Name="kullanici_id" />
-            </Principal>
-            <Dependent Role="Gorevlendirme">
-              <PropertyRef Name="yonetici_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="IsYonetimDBModelStoreContainer">
-          <EntitySet Name="Gorevlendirme" EntityType="Self.Gorevlendirme" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Izin" EntityType="Self.Izin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="fk_izin_veren_yonetici" Association="Self.fk_izin_veren_yonetici">
-            <End Role="Yonetici" EntitySet="Yonetici" />
-            <End Role="Izin" EntitySet="Izin" />
-          </AssociationSet>
-          <AssociationSet Name="fk_izinli_personel" Association="Self.fk_izinli_personel">
-            <End Role="Personel" EntitySet="Personel" />
-            <End Role="Izin" EntitySet="Izin" />
-          </AssociationSet>
-          <AssociationSet Name="fk_personel" Association="Self.fk_personel">
-            <End Role="Personel" EntitySet="Personel" />
-            <End Role="Gorevlendirme" EntitySet="Gorevlendirme" />
-          </AssociationSet>
-          <AssociationSet Name="fk_yonetici" Association="Self.fk_yonetici">
-            <End Role="Yonetici" EntitySet="Yonetici" />
-            <End Role="Gorevlendirme" EntitySet="Gorevlendirme" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="IsYonetimDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="IsYonetimDBModelStoreContainer">
+    <EntitySet Name="Tasks" EntityType="IsYonetimDBModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Personnels" EntityType="IsYonetimDBModel.Store.Personnels" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Managers" EntityType="IsYonetimDBModel.Store.Managers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Leaves" EntityType="IsYonetimDBModel.Store.Leaves" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="fk_personel" Association="IsYonetimDBModel.Store.fk_personnel">
+      <End Role="Personnel" EntitySet="Personnels" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="fk_yonetici" Association="IsYonetimDBModel.Store.fk_manager">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="fk_izin_veren_yonetici" Association="IsYonetimDBModel.Store.fk_permitting_manager">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Leave" EntitySet="Leaves" />
+    </AssociationSet>
+    <AssociationSet Name="fk_izinli_personel" Association="IsYonetimDBModel.Store.fk_personnel_on_leave">
+      <End Role="Personnel" EntitySet="Personnels" />
+      <End Role="Leave" EntitySet="Leaves" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="task_id" />
+    </Key>
+    <Property Name="task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personnel_id" Type="int" Nullable="false" />
+    <Property Name="manager_id" Type="int" Nullable="false" />
+    <Property Name="task_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="task_detail" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Personnels">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="first_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="last_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="email" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="salary" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Managers">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="first_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="last_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="email" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="salary" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Leaves">
+    <Key>
+      <PropertyRef Name="leave_id" />
+    </Key>
+    <Property Name="leave_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personnel_id" Type="int" Nullable="false" />
+    <Property Name="manager_id" Type="int" Nullable="false" />
+    <Property Name="leave_reason" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="leave_start_date" Type="datetime" Nullable="false" />
+    <Property Name="leave_end_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_personnel">
+    <End Role="Personnel" Type="IsYonetimDBModel.Store.Personnels" Multiplicity="1" />
+    <End Role="Task" Type="IsYonetimDBModel.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="personnel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_manager">
+    <End Role="Manager" Type="IsYonetimDBModel.Store.Managers" Multiplicity="1" />
+    <End Role="Task" Type="IsYonetimDBModel.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="manager_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_permitting_manager">
+    <End Role="Manager" Type="IsYonetimDBModel.Store.Managers" Multiplicity="1" />
+    <End Role="Leave" Type="IsYonetimDBModel.Store.Leaves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Leave">
+        <PropertyRef Name="manager_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_personnel_on_leave">
+    <End Role="Personnel" Type="IsYonetimDBModel.Store.Personnels" Multiplicity="1" />
+    <End Role="Leave" Type="IsYonetimDBModel.Store.Leaves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Leave">
+        <PropertyRef Name="personnel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IsYonetimDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Gorevlendirme">
+        <EntityType Name="Task">
           <Key>
-            <PropertyRef Name="gorev_id" />
+            <PropertyRef Name="task_id" />
           </Key>
-          <Property Name="gorev_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="personel_id" Type="Int32" Nullable="false" />
-          <Property Name="yonetici_id" Type="Int32" Nullable="false" />
-          <Property Name="gorev_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="gorev_tanimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Personel" Relationship="Self.fk_personel" FromRole="Gorevlendirme" ToRole="Personel" />
-          <NavigationProperty Name="Yonetici" Relationship="Self.fk_yonetici" FromRole="Gorevlendirme" ToRole="Yonetici" />
+          <Property Name="task_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personnel_id" Type="Int32" Nullable="false" />
+          <Property Name="manager_id" Type="Int32" Nullable="false" />
+          <Property Name="task_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="task_detail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Personnel" Relationship="IsYonetimDBModel.fk_personnel" FromRole="Task" ToRole="Personnel" />
+          <NavigationProperty Name="Manager" Relationship="IsYonetimDBModel.fk_manager" FromRole="Task" ToRole="Manager" />
         </EntityType>
-        <EntityType Name="Personel">
+        <EntityType Name="Personnel">
           <Key>
-            <PropertyRef Name="kullanici_id" />
+            <PropertyRef Name="user_id" />
           </Key>
-          <Property Name="kullanici_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="kullanici_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="parola" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="maas" Type="Int32" />
-          <NavigationProperty Name="Gorevlendirmes" Relationship="Self.fk_personel" FromRole="Personel" ToRole="Gorevlendirme" />
-          <NavigationProperty Name="Izins" Relationship="IsYonetimDBModel.fk_izinli_personel" FromRole="Personel" ToRole="Izin" />
+          <Property Name="salary" Type="Int32" />
+          <NavigationProperty Name="Tasks" Relationship="IsYonetimDBModel.fk_personnel" FromRole="Personnel" ToRole="Task" />
+          <NavigationProperty Name="Leaves" Relationship="IsYonetimDBModel.fk_personnel_on_leave" FromRole="Personnel" ToRole="Leave" />
         </EntityType>
-        <EntityType Name="Yonetici">
+        <EntityType Name="Manager">
           <Key>
-            <PropertyRef Name="kullanici_id" />
+            <PropertyRef Name="user_id" />
           </Key>
-          <Property Name="kullanici_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="kullanici_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="parola" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="maas" Type="Int32" />
-          <NavigationProperty Name="Gorevlendirmes" Relationship="Self.fk_yonetici" FromRole="Yonetici" ToRole="Gorevlendirme" />
-          <NavigationProperty Name="Izins" Relationship="IsYonetimDBModel.fk_izin_veren_yonetici" FromRole="Yonetici" ToRole="Izin" />
+          <Property Name="salary" Type="Int32" />
+          <NavigationProperty Name="Tasks" Relationship="IsYonetimDBModel.fk_manager" FromRole="Manager" ToRole="Task" />
+          <NavigationProperty Name="Leaves" Relationship="IsYonetimDBModel.fk_permitting_manager" FromRole="Manager" ToRole="Leave" />
         </EntityType>
-        <Association Name="fk_personel">
-          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
-          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
+        <Association Name="fk_personnel">
+          <End Role="Personnel" Type="IsYonetimDBModel.Personnel" Multiplicity="1" />
+          <End Role="Task" Type="IsYonetimDBModel.Task" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personel">
-              <PropertyRef Name="kullanici_id" />
+            <Principal Role="Personnel">
+              <PropertyRef Name="user_id" />
             </Principal>
-            <Dependent Role="Gorevlendirme">
-              <PropertyRef Name="personel_id" />
+            <Dependent Role="Task">
+              <PropertyRef Name="personnel_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_yonetici">
-          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
-          <End Role="Gorevlendirme" Type="Self.Gorevlendirme" Multiplicity="*" />
+        <Association Name="fk_manager">
+          <End Role="Manager" Type="IsYonetimDBModel.Manager" Multiplicity="1" />
+          <End Role="Task" Type="IsYonetimDBModel.Task" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Yonetici">
-              <PropertyRef Name="kullanici_id" />
+            <Principal Role="Manager">
+              <PropertyRef Name="user_id" />
             </Principal>
-            <Dependent Role="Gorevlendirme">
-              <PropertyRef Name="yonetici_id" />
+            <Dependent Role="Task">
+              <PropertyRef Name="manager_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="IsYonetimDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Gorevlendirmes" EntityType="Self.Gorevlendirme" />
-          <EntitySet Name="Personels" EntityType="Self.Personel" />
-          <EntitySet Name="Yoneticis" EntityType="Self.Yonetici" />
-          <AssociationSet Name="fk_personel" Association="Self.fk_personel">
-            <End Role="Personel" EntitySet="Personels" />
-            <End Role="Gorevlendirme" EntitySet="Gorevlendirmes" />
+          <EntitySet Name="Tasks" EntityType="IsYonetimDBModel.Task" />
+          <EntitySet Name="Personnels" EntityType="IsYonetimDBModel.Personnel" />
+          <EntitySet Name="Managers" EntityType="IsYonetimDBModel.Manager" />
+          <AssociationSet Name="fk_personel" Association="IsYonetimDBModel.fk_personnel">
+            <End Role="Personnel" EntitySet="Personnels" />
+            <End Role="Task" EntitySet="Tasks" />
           </AssociationSet>
-          <AssociationSet Name="fk_yonetici" Association="Self.fk_yonetici">
-            <End Role="Yonetici" EntitySet="Yoneticis" />
-            <End Role="Gorevlendirme" EntitySet="Gorevlendirmes" />
+          <AssociationSet Name="fk_yonetici" Association="IsYonetimDBModel.fk_manager">
+            <End Role="Manager" EntitySet="Managers" />
+            <End Role="Task" EntitySet="Tasks" />
           </AssociationSet>
-          <EntitySet Name="Izins" EntityType="IsYonetimDBModel.Izin" />
-          <AssociationSet Name="fk_izin_veren_yonetici" Association="IsYonetimDBModel.fk_izin_veren_yonetici">
-            <End Role="Yonetici" EntitySet="Yoneticis" />
-            <End Role="Izin" EntitySet="Izins" />
+          <EntitySet Name="Leaves" EntityType="IsYonetimDBModel.Leave" />
+          <AssociationSet Name="fk_izin_veren_yonetici" Association="IsYonetimDBModel.fk_permitting_manager">
+            <End Role="Manager" EntitySet="Managers" />
+            <End Role="Leave" EntitySet="Leaves" />
           </AssociationSet>
-          <AssociationSet Name="fk_izinli_personel" Association="IsYonetimDBModel.fk_izinli_personel">
-            <End Role="Personel" EntitySet="Personels" />
-            <End Role="Izin" EntitySet="Izins" />
+          <AssociationSet Name="fk_izinli_personel" Association="IsYonetimDBModel.fk_personnel_on_leave">
+            <End Role="Personnel" EntitySet="Personnels" />
+            <End Role="Leave" EntitySet="Leaves" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Izin">
+        <EntityType Name="Leave">
           <Key>
-            <PropertyRef Name="izin_id" />
+            <PropertyRef Name="leave_id" />
           </Key>
-          <Property Name="izin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="personel_id" Type="Int32" Nullable="false" />
-          <Property Name="yonetici_id" Type="Int32" Nullable="false" />
-          <Property Name="izin_sebebi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="izin_baslangic_tarihi" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="izin_bitis_tarihi" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Yonetici" Relationship="IsYonetimDBModel.fk_izin_veren_yonetici" FromRole="Izin" ToRole="Yonetici" />
-          <NavigationProperty Name="Personel" Relationship="IsYonetimDBModel.fk_izinli_personel" FromRole="Izin" ToRole="Personel" />
+          <Property Name="leave_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personnel_id" Type="Int32" Nullable="false" />
+          <Property Name="manager_id" Type="Int32" Nullable="false" />
+          <Property Name="leave_reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="leave_start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="leave_end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Manager" Relationship="IsYonetimDBModel.fk_permitting_manager" FromRole="Leave" ToRole="Manager" />
+          <NavigationProperty Name="Personnel" Relationship="IsYonetimDBModel.fk_personnel_on_leave" FromRole="Leave" ToRole="Personnel" />
         </EntityType>
-        <Association Name="fk_izin_veren_yonetici">
-          <End Type="IsYonetimDBModel.Yonetici" Role="Yonetici" Multiplicity="1" />
-          <End Type="IsYonetimDBModel.Izin" Role="Izin" Multiplicity="*" />
+        <Association Name="fk_permitting_manager">
+          <End Type="IsYonetimDBModel.Manager" Role="Manager" Multiplicity="1" />
+          <End Type="IsYonetimDBModel.Leave" Role="Leave" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Yonetici">
-              <PropertyRef Name="kullanici_id" />
+            <Principal Role="Manager">
+              <PropertyRef Name="user_id" />
             </Principal>
-            <Dependent Role="Izin">
-              <PropertyRef Name="yonetici_id" />
+            <Dependent Role="Leave">
+              <PropertyRef Name="manager_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_izinli_personel">
-          <End Type="IsYonetimDBModel.Personel" Role="Personel" Multiplicity="1" />
-          <End Type="IsYonetimDBModel.Izin" Role="Izin" Multiplicity="*" />
+        <Association Name="fk_personnel_on_leave">
+          <End Type="IsYonetimDBModel.Personnel" Role="Personnel" Multiplicity="1" />
+          <End Type="IsYonetimDBModel.Leave" Role="Leave" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personel">
-              <PropertyRef Name="kullanici_id" />
+            <Principal Role="Personnel">
+              <PropertyRef Name="user_id" />
             </Principal>
-            <Dependent Role="Izin">
-              <PropertyRef Name="personel_id" />
+            <Dependent Role="Leave">
+              <PropertyRef Name="personnel_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -251,60 +251,59 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IsYonetimDBModelStoreContainer" CdmEntityContainer="IsYonetimDBEntities">
-          <EntitySetMapping Name="Gorevlendirmes">
-            <EntityTypeMapping TypeName="IsYonetimDBModel.Gorevlendirme">
-              <MappingFragment StoreEntitySet="Gorevlendirme">
-                <ScalarProperty Name="gorev_id" ColumnName="gorev_id" />
-                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
-                <ScalarProperty Name="yonetici_id" ColumnName="yonetici_id" />
-                <ScalarProperty Name="gorev_adi" ColumnName="gorev_adi" />
-                <ScalarProperty Name="gorev_tanimi" ColumnName="gorev_tanimi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Personels">
-            <EntityTypeMapping TypeName="IsYonetimDBModel.Personel">
-              <MappingFragment StoreEntitySet="Personel">
-                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
-                <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
-                <ScalarProperty Name="parola" ColumnName="parola" />
-                <ScalarProperty Name="ad" ColumnName="ad" />
-                <ScalarProperty Name="soyad" ColumnName="soyad" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="maas" ColumnName="maas" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Yoneticis">
-            <EntityTypeMapping TypeName="IsYonetimDBModel.Yonetici">
-              <MappingFragment StoreEntitySet="Yonetici">
-                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
-                <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
-                <ScalarProperty Name="parola" ColumnName="parola" />
-                <ScalarProperty Name="ad" ColumnName="ad" />
-                <ScalarProperty Name="soyad" ColumnName="soyad" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="maas" ColumnName="maas" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Izins">
-            <EntityTypeMapping TypeName="IsYonetimDBModel.Izin">
-              <MappingFragment StoreEntitySet="Izin">
-                <ScalarProperty Name="izin_bitis_tarihi" ColumnName="izin_bitis_tarihi" />
-                <ScalarProperty Name="izin_baslangic_tarihi" ColumnName="izin_baslangic_tarihi" />
-                <ScalarProperty Name="izin_sebebi" ColumnName="izin_sebebi" />
-                <ScalarProperty Name="yonetici_id" ColumnName="yonetici_id" />
-                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
-                <ScalarProperty Name="izin_id" ColumnName="izin_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IsYonetimDBModelStoreContainer" CdmEntityContainer="IsYonetimDBEntities">
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="IsTypeOf(IsYonetimDBModel.Task)">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+          <ScalarProperty Name="personnel_id" ColumnName="personnel_id" />
+          <ScalarProperty Name="manager_id" ColumnName="manager_id" />
+          <ScalarProperty Name="task_name" ColumnName="task_name" />
+          <ScalarProperty Name="task_detail" ColumnName="task_detail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personnels">
+      <EntityTypeMapping TypeName="IsTypeOf(IsYonetimDBModel.Personnel)">
+        <MappingFragment StoreEntitySet="Personnels">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Managers">
+      <EntityTypeMapping TypeName="IsTypeOf(IsYonetimDBModel.Manager)">
+        <MappingFragment StoreEntitySet="Managers">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Leaves">
+      <EntityTypeMapping TypeName="IsTypeOf(IsYonetimDBModel.Leave)">
+        <MappingFragment StoreEntitySet="Leaves">
+          <ScalarProperty Name="leave_id" ColumnName="leave_id" />
+          <ScalarProperty Name="personnel_id" ColumnName="personnel_id" />
+          <ScalarProperty Name="manager_id" ColumnName="manager_id" />
+          <ScalarProperty Name="leave_reason" ColumnName="leave_reason" />
+          <ScalarProperty Name="leave_start_date" ColumnName="leave_start_date" />
+          <ScalarProperty Name="leave_end_date" ColumnName="leave_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -318,7 +317,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

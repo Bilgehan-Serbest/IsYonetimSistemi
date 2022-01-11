@@ -24,6 +24,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +62,7 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -68,19 +71,17 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
@@ -1007,6 +1008,7 @@
       <DependentUpon>DbModel.edmx</DependentUpon>
       <LastGenOutput>DbModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\DbModel.edmx.sql" />
     <Content Include="Models\DbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DbModel.edmx</DependentUpon>
@@ -1153,6 +1155,7 @@
     <Content Include="Content\bootstrap\css\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap-datepicker.css.map" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1287,20 +1290,20 @@
     <Content Include="Style\vendor\select2\select2.min.css" />
     <Content Include="Style\vendor\select2\select2.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Shared\yoneticiPanel.cshtml" />
-    <Content Include="Views\Home\YoneticiAnaSayfa.cshtml" />
+    <Content Include="Views\Shared\managerPanel.cshtml" />
+    <Content Include="Views\Home\ManagerHomePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\GorevController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IzinController.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\MultipleButtonAttribute.cs" />
-    <Compile Include="Controllers\PersonelController.cs" />
-    <Compile Include="Controllers\PersonelKayitController.cs" />
-    <Compile Include="Controllers\GirisController.cs" />
-    <Compile Include="Controllers\YoneticiKayitController.cs" />
+    <Compile Include="Controllers\PersonnelController.cs" />
+    <Compile Include="Controllers\PersonnelRegisterController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManagerRegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1319,17 +1322,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Gorevlendirme.cs">
-      <DependentUpon>DbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IsYonetim.cs" />
-    <Compile Include="Models\Izin.cs">
+    <Compile Include="Models\Leave.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Personel.cs">
+    <Compile Include="Models\Manager.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Yonetici.cs">
+    <Compile Include="Models\Personnel.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1341,7 +1344,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Giris\YoneticiGiris.cshtml" />
+    <Content Include="Views\Login\ManagerLogin.cshtml" />
     <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Style\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -1403,27 +1406,27 @@
     <Content Include="Style\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Style\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Style\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="Views\PersonelKayit\PersonelKayit.cshtml" />
-    <Content Include="Views\YoneticiKayit\YoneticiKayit.cshtml" />
-    <Content Include="Views\Personel\Detay.cshtml" />
-    <Content Include="Views\Personel\Index.cshtml" />
-    <Content Include="Views\Personel\Düzenle.cshtml" />
-    <Content Include="Views\Gorev\GorevAtama.cshtml" />
-    <Content Include="Views\Gorev\GorevListeleme.cshtml" />
-    <Content Include="Views\Personel\Sil.cshtml" />
-    <Content Include="Views\Gorev\GorevSilme.cshtml" />
-    <Content Include="Views\Izin\IzinVerme.cshtml" />
-    <Content Include="Views\Izin\IzinListeleme.cshtml" />
-    <Content Include="Views\Izin\IzinSilme.cshtml" />
-    <Content Include="Views\Gorev\GorevDuzenleme.cshtml" />
-    <Content Include="Views\Izin\IzinDuzenleme.cshtml" />
-    <Content Include="Views\Home\GirisSecim.cshtml" />
-    <Content Include="Views\Giris\PersonelGiris.cshtml" />
-    <Content Include="Views\Shared\personelPanel.cshtml" />
-    <Content Include="Views\Personel\PersonelGorevleri.cshtml" />
-    <Content Include="Views\Personel\PersonelIzinleri.cshtml" />
-    <Content Include="Views\Home\PersonelAnaSayfa.cshtml" />
-    <Content Include="Views\Personel\PersonelListesi_p.cshtml" />
+    <Content Include="Views\PersonnelRegister\PersonnelRegister.cshtml" />
+    <Content Include="Views\ManagerRegister\ManagerRegister.cshtml" />
+    <Content Include="Views\Personnel\Details.cshtml" />
+    <Content Include="Views\Personnel\Index.cshtml" />
+    <Content Include="Views\Personnel\Edit.cshtml" />
+    <Content Include="Views\Task\GiveTask.cshtml" />
+    <Content Include="Views\Task\ListTasks.cshtml" />
+    <Content Include="Views\Personnel\Delete.cshtml" />
+    <Content Include="Views\Task\DeleteTask.cshtml" />
+    <Content Include="Views\Leave\GiveLeave.cshtml" />
+    <Content Include="Views\Leave\ListLeaves.cshtml" />
+    <Content Include="Views\Leave\DeleteLeave.cshtml" />
+    <Content Include="Views\Task\EditTask.cshtml" />
+    <Content Include="Views\Leave\EditLeave.cshtml" />
+    <Content Include="Views\Home\SelectLogin.cshtml" />
+    <Content Include="Views\Login\PersonnelLogin.cshtml" />
+    <Content Include="Views\Shared\personnelPanel.cshtml" />
+    <Content Include="Views\Personnel\PersonnelTasks.cshtml" />
+    <Content Include="Views\Personnel\PersonnelLeaves.cshtml" />
+    <Content Include="Views\Home\PersonnelHomePage.cshtml" />
+    <Content Include="Views\Personnel\PersonnelList_p.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

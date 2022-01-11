@@ -8,15 +8,15 @@ namespace IsYonetimSistemi.Controllers
 {
     public class HomeController : Controller
     {        
-        public ActionResult YoneticiAnaSayfa()
+        public ActionResult ManagerHomePage()
         {
             return View();
         }
-        public ActionResult PersonelAnaSayfa()
+        public ActionResult PersonnelHomePage()
         {
             return View();
         }
-        public ActionResult GirisSecim()
+        public ActionResult SelectLogin()
         {
             return View();
         }

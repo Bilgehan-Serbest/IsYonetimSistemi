@@ -1,0 +1,52 @@
+﻿@model List<IsYonetimSistemi.Models.Leave>
+@using IsYonetimSistemi.Models;
+@{
+    ViewBag.Title = "PersonnelLeaves";
+    Layout = "~/Views/Shared/personnelPanel.cshtml";
+}
+
+<h2>Izin Listeleme</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            İzin Sebebi
+        </th>
+        <th>
+            İzin Başlangıç Tarihi
+        </th>
+        <th>
+            İzin Bitiş Tarihi
+        </th>
+        <th>
+            İzin Veren Yönetici
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.leave_reason
+            </td>
+            <td>
+                @item.leave_start_date
+            </td>
+            <td>
+                @item.leave_end_date
+            </td>
+            <td>
+                @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
+                    {
+                        var izinVerenYonetici = dbModel.Managers.Where(x => x.user_id == item.manager_id).FirstOrDefault();
+                        @izinVerenYonetici.first_name;
+                        <br />
+                        @izinVerenYonetici.last_name;
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

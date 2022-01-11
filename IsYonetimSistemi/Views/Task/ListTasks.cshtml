@@ -1,0 +1,64 @@
+﻿@model List<IsYonetimSistemi.Models.Task>
+@using IsYonetimSistemi.Models;
+    @{
+        ViewBag.Title = "ListTasks";
+        Layout = "~/Views/Shared/managerPanel.cshtml";
+    }
+
+    <h2>Gorev Listeleme</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Görev Adı   
+            </th>
+            <th>
+                Görev Tanımı
+            </th>
+            <th>
+               Görevin Atandığı Personel
+            </th>
+            <th>
+                Görevi Atayan Yönetici
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.task_name
+                </td>
+                <td>
+                    @item.task_detail
+                </td>
+                <td>
+                    @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
+                        {
+                            var gorevinAtandigiPersonel = dbModel.Personnels.Where(x => x.user_id == item.personnel_id).FirstOrDefault();
+                            @gorevinAtandigiPersonel.first_name;
+                            <br />
+                            @gorevinAtandigiPersonel.last_name;
+                        }
+                    }
+                </td>
+                <td>
+                    @{ using (IsYonetimDBEntities dbModel = new IsYonetimDBEntities())
+                        {
+                            var gorevAtayanYonetici = dbModel.Managers.Where(x => x.user_id == item.manager_id).FirstOrDefault();
+                            @gorevAtayanYonetici.first_name;
+                            <br />
+                            @gorevAtayanYonetici.last_name;
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Düzenle", "EditTask", new { id = item.task_id }) |
+                    @Html.ActionLink("Sil", "DeleteTask", new { id = item.task_id })
+                </td>
+            </tr>
+        }
+
+    </table>
+

@@ -1,0 +1,40 @@
+﻿@model IsYonetimSistemi.Models.Task
+@{
+    ViewBag.Title = "DeleteTask";
+    Layout = "~/Views/Shared/managerPanel.cshtml";
+}
+
+<h2>Görev Silme</h2>
+
+<h3>Bu görevi silmek istediğinizden emin misiniz?</h3>
+<div>
+    <h4>Görev</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.task_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.task_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.task_detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.task_detail)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Görev Listesine Dön", "ListTasks")
+        </div>
+    }
+</div>
